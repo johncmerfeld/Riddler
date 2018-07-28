@@ -15,3 +15,14 @@ Is it possible to win? If so, how? If not, what are the largest and smallest num
 
 ## Strategy
 Brute force! Recursively check every possible move. Let's see how long that takes... 
+
+### Strategy update:
+
+Turns out you don't even need to be that rigorous. Brute force based on random guesses yielded a valid solution for every possible starting position. Some starting positions seem to have more solutions than others, but it can be done from anywhere on the grid!
+
+### What the code does:
+
+1. Start from a given point at depth 1
+2. Write the depth number at that point and try random valid moves until a valid empty point is found. If one can't be found, print the depth and return
+3. If you reach depth 26, the grid is full and you've won!
+4. Try steps 1-3 from every starting point a hundred times
