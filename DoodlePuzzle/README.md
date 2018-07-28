@@ -1,6 +1,6 @@
 # DoodlePuzzle
 
-## The challenge
+## [The challenge](https://fivethirtyeight.com/features/the-perfect-doodle-puzzle-to-keep-you-busy-during-boring-meetings/)
 From Renaud Dubedout, a puzzle perfect for doodling during a boring class or meeting, not that I would ever endorse that sort of thing:
 
 Start with an empty 5-by-5 grid of squares, and choose any square you want as your starting square. The rules for moving through the grid from there are strict:
@@ -29,4 +29,12 @@ Turns out you don't even need to be that rigorous. Brute force based on random g
 
 ## How to read the output
 
-The solutions.txt file contains all the valid grids my brute force run found.
+The solutions.txt file contains all the valid grids my brute force run found with 100 attempts at each starting position (given as X Y coordinates where 0 0 is the top left space. 
+
+The number in each space is the order in which it was visited, with 1 being the first stop, 2 being the second, etc.
+
+## What could I do better?
+
+- The underlying engine of this is randomness and brute force. The solution space isn't enormous, but I found that the randomness was easier to code than rigorously checking every solution. If the problem were a lot larger, the random-based solution would start to slow down and I'd benefit from a smarter algorithm.
+- Furthermoe, an exhaustive search of the solution space would generate reliable statistics about what the best starting positions were (exactly how many solutions exist from each starting point). No doubt another member of Riddler Nation has figured this out.
+- No cute visualizations this time, alas!
