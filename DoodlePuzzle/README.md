@@ -1,5 +1,7 @@
 # DoodlePuzzle
 
+## Headline -- There are multiple solutions at every starting point!`
+
 ## [The challenge](https://fivethirtyeight.com/features/the-perfect-doodle-puzzle-to-keep-you-busy-during-boring-meetings/)
 From Renaud Dubedout, a puzzle perfect for doodling during a boring class or meeting, not that I would ever endorse that sort of thing:
 
