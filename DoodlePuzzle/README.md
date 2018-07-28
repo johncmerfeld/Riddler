@@ -26,3 +26,7 @@ Turns out you don't even need to be that rigorous. Brute force based on random g
 2. Write the depth number at that point and try random valid moves until a valid empty point is found. If one can't be found, print the depth and return
 3. If you reach depth 26, the grid is full and you've won!
 4. Try steps 1-3 from every starting point a hundred times
+
+## How to read the output
+
+The solutions.txt file contains all the valid grids my brute force run found.
