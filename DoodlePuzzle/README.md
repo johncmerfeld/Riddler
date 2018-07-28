@@ -45,5 +45,5 @@ The number in each space is the order in which it was visited, with 1 being the 
 ## What could I do better?
 
 - The underlying engine of this is randomness and brute force. The solution space isn't enormous, but I found that the randomness was easier to code than rigorously checking every solution. If the problem were a lot larger, the random-based solution would start to slow down and I'd benefit from a smarter algorithm.
-- Furthermoe, an exhaustive search of the solution space would generate reliable statistics about what the best starting positions were (exactly how many solutions exist from each starting point). No doubt another member of Riddler Nation has figured this out.
+- Furthermore, an exhaustive search of the solution space would generate reliable statistics about what the best starting positions were (exactly how many solutions exist from each starting point). No doubt another member of Riddler Nation has figured this out.
 - No cute visualizations this time, alas!
