@@ -34,9 +34,11 @@ Turns out you don't even need to be that rigorous. Brute force based on random g
 The solutions.txt file contains all the valid grids my brute force run found with 100 attempts at each starting position (given as X Y coordinates where 0 0 is the top left space).
 
 A grid looks like this: 
+```
 [[...]
  [...]
- [...]] 
+ [...]]
+```
 
 The number in each space is the order in which it was visited, with 1 being the first stop, 2 being the second, etc.
 
