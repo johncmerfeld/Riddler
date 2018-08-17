@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> NumberProfit Riddler solution </title>A
+        <link rel="stylesheet" type="text/css" href="articlestyle.css">
+    </head>
+
+    <body>
+
+        <header>
+            <h1> NumberProfit, a Riddler solution by John C. Merfeld </h1>
+        </header>
+
+        <h3> From the <A href="https://fivethirtyeight.com/features/step-1-game-theory-step-2-step-3-profit/">August 17, 2018</A> Riddler: </h3>
+
+        <p> Ariel, Beatrice and Cassandra — three brilliant game theorists — were bored at a game theory conference (shocking, we know) and devised the following game to pass the time. They drew a number line and placed $1 on the 1, $2 on the 2, $3 on the 3 and so on to $10 on the 10. </p>
+
+        <p> Each player has a personalized token. They take turns — Ariel first, Beatrice second and Cassandra third — placing their tokens on one of the money stacks (only one token is allowed per space). Once the tokens are all placed, each player gets to take every stack that her token is on or is closest to. If a stack is midway between two tokens, the players split that cash. </p>
+
+        <p> And now <strong>you</strong> can play a crappy but functional JavaScript version of this game! Simply select a space for each token and see what everyone's payout is.</p>
+
+        <p> 
+        Player A's token: 
+        <select id="ddlViewBy1">
+            <option value="0"selected="selected">(select one)</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        </p>
+        <p>
+        Player B's token:
+        <select id="ddlViewBy2">
+            <option value="0"selected="selected">(select one)</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        </p>
+        <p>
+        Player C's token:
+        <select id="ddlViewBy3">
+            <option value="0"selected="selected">(select one)</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+	</p>
+        <button onclick="playGame()">Who wins what?</button>
+
+        <p id="playerA"></p>
+        <p id="playerB"></p>
+        <p id="playerC"></p>
+
+        <script>
+          function playGame() {
+            /* place the three tokens */
+            let t1 = document.getElementById("ddlViewBy1");
+            let v1 = parseInt(t1.options[t1.selectedIndex].value);
+            let t2 = document.getElementById("ddlViewBy2");
+            let v2 = parseInt(t2.options[t2.selectedIndex].value);
+            let t3 = document.getElementById("ddlViewBy3");
+            let v3 = parseInt(t3.options[t3.selectedIndex].value);
+
+            /* make sure the user actually did something */
+            if (v1 == 0 || v2 == 0 || v3 == 0) {
+              document.getElementById("playerA").innerHTML = "You need to select a valid spot for all three players!";
+              document.getElementById("playerB").innerHTML = "";
+              document.getElementById("playerC").innerHTML = "";
+            } else if (v1 == v2 || v2 == v3 || v3 == v1) {
+              document.getElementById("playerA").innerHTML = "You can't put multiple tokens on the same space!";
+              document.getElementById("playerB").innerHTML = "";
+              document.getElementById("playerC").innerHTML = "";
+            } else {
+              /* calculate payouts */
+              /* WARNING: this is like a super dumb way to do this but
+              /*   I don't know what JavaScript's data structures are like */
+              let low = 0;
+              let mid = 0;
+              let high = 0;
+              let lowest = 0;
+              let middle = 0;
+              let highest = 0;
+              if (v1 > v2 && v1 > v3) {
+                high = v1
+                highest = 1
+                if (v2 > v3) {
+                  mid = v2
+                  middle = 2
+                  low = v3
+                  lowest = 3
+                } else {
+                  mid = v3
+                  middle = 3
+                  low = v2
+                  lowest = 2
+                }
+              } else if (v2 > v1 && v2 > v3) {
+                high = v2
+                highest = 2
+                if (v1 > v3) {
+                  mid = v1
+                  middle = 1
+                  low = v3
+                  lowest = 3
+                } else {
+                  mid = v3
+                  middle = 3
+                  low = v1
+                  lowest = 1
+                }
+              } else {
+                high = v3
+                highest = 3
+                if (v1 > v2) {
+                  mid = v1
+                  middle = 1
+                  low = v2
+                  lowest = 2
+                } else {
+                  mid = v2
+                  middle = 2
+                  low = v1
+                  lowest = 1
+                }
+              }
+
+              let plow = 0;
+              let pmid = 0;
+              let phigh = 0;
+
+              /* first, the easy stuff */
+              var i
+              for (i = 1; i <= low; i++) {
+                plow += i;
+              }
+              pmid = parseInt(mid);
+              for (i = 10; i >= high; i--) {
+                phigh += i;
+              }
+
+              /* now, low-mid conflicts */
+              for (i = 1; i <= ((mid - low) / 2.0); i++) {
+                if ((mid - i) == (low + i)) {
+                  plow += ((mid + low) / 4.0);
+                  pmid += ((mid + low) / 4.0);
+                } else {
+                  plow += low + i;
+                  pmid += mid - i;
+                }
+              }
+
+              /* now, mid-high conflicts */
+              for (i = 1; i <= ((high - mid) / 2.0); i++) {
+                if ((high - i) == (mid + i)) {
+                  pmid += ((high + mid) / 4.0);
+                  phigh += ((high + mid) / 4.0);
+                } else {
+                  pmid += mid + i;
+                  phigh += high - i;
+                }
+              }
+              
+             if (lowest == 1) {
+               p1 = plow
+             } else if (lowest == 2) {
+               p2 = plow
+             } else {
+               p3 = plow
+             }
+             if (middle == 1) {
+               p1 = pmid
+             } else if (middle == 2) {
+               p2 = pmid
+             } else {
+               p3 = pmid
+             }
+             if (highest == 1) {
+               p1 = highest
+             } else if (highest == 2) {
+               p2 = phigh
+             } else {
+               p3 = phigh
+             }
+
+              /* print payouts to the screen */
+              document.getElementById("playerA").innerHTML = "Player A wins $" + p1.toFixed(2);
+              document.getElementById("playerB").innerHTML = "Player B wins $" + p2.toFixed(2);
+              document.getElementById("playerC").innerHTML = "Player C wins $" + p3.toFixed(2);
+            }
+
+          }
+
+
+
+        </script>
+
+    </body>
+</html>
