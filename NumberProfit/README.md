@@ -10,3 +10,11 @@ Each player has a personalized token. They take turns — Ariel first, Beatrice 
 How will this game play out? How much is it worth to go first?
 
 *A grab bag of extra credits:* What if the game were played not on a number line but on a clock, with values of $1 to $12? What if Desdemona, Eleanor and so on joined the original game? What if the tokens could be placed anywhere on the number line, not just the stacks?
+
+## Strategy:
+For starters, I thought it'd be fun to make a real, playable version of the game, which you can find [here](https://johncmerfeld.github.io/numberProfit.html). I messed around with this for a while and thought I knew what the optimal move for player A was, but it was hard to be sure without writing everything down. Therefore, it was time for some MiniMax game-tree traversal!
+
+Yes, that's right. I'd have to write a script that could do a few things:
+  - `calculateExpectedProfit()` given a board (which tokens are where), the number of players who still need to place their tokens, and a proposed token location
+
+
