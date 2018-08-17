@@ -104,46 +104,46 @@
               let middle = 0;
               let highest = 0;
               if (v1 > v2 && v1 > v3) {
-                high = v1
-                highest = 1
+                high = v1;
+                highest = 1;
                 if (v2 > v3) {
-                  mid = v2
-                  middle = 2
-                  low = v3
-                  lowest = 3
+                  mid = v2;
+                  middle = 2;
+                  low = v3;
+                  lowest = 3;
                 } else {
-                  mid = v3
-                  middle = 3
-                  low = v2
-                  lowest = 2
+                  mid = v3;
+                  middle = 3;
+                  low = v2;
+                  lowest = 2;
                 }
               } else if (v2 > v1 && v2 > v3) {
-                high = v2
-                highest = 2
+                high = v2;
+                highest = 2;
                 if (v1 > v3) {
-                  mid = v1
-                  middle = 1
-                  low = v3
-                  lowest = 3
+                  mid = v1;
+                  middle = 1;
+                  low = v3;
+                  lowest = 3;
                 } else {
-                  mid = v3
-                  middle = 3
-                  low = v1
-                  lowest = 1
+                  mid = v3;
+                  middle = 3;
+                  low = v1;
+                  lowest = 1;
                 }
               } else {
-                high = v3
-                highest = 3
+                high = v3;
+                highest = 3;
                 if (v1 > v2) {
-                  mid = v1
-                  middle = 1
-                  low = v2
-                  lowest = 2
+                  mid = v1;
+                  middle = 1;
+                  low = v2;
+                  lowest = 2;
                 } else {
-                  mid = v2
-                  middle = 2
-                  low = v1
-                  lowest = 1
+                  mid = v2;
+                  middle = 2;
+                  low = v1;
+                  lowest = 1;
                 }
               }
 
@@ -182,27 +182,27 @@
                   phigh += high - i;
                 }
               }
-              
+
              if (lowest == 1) {
-               p1 = plow
+               p1 = plow;
              } else if (lowest == 2) {
-               p2 = plow
+               p2 = plow;
              } else {
-               p3 = plow
+               p3 = plow;
              }
              if (middle == 1) {
-               p1 = pmid
+               p1 = pmid;
              } else if (middle == 2) {
-               p2 = pmid
+               p2 = pmid;
              } else {
-               p3 = pmid
+               p3 = pmid;
              }
              if (highest == 1) {
-               p1 = highest
+               p1 = phigh;
              } else if (highest == 2) {
-               p2 = phigh
+               p2 = phigh;
              } else {
-               p3 = phigh
+               p3 = phigh;
              }
 
               /* print payouts to the screen */
