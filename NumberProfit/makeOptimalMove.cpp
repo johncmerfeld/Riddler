@@ -1,6 +1,8 @@
+
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <iomanip>
 using namespace std;
 
 float ownedByMe(vector<int> board, int boardPosition, int myPosition) {
@@ -57,8 +59,10 @@ float ownedByMe(vector<int> board, int boardPosition, int myPosition) {
 
 float calculateProfit(vector<int> board, int tokenPosition) {
 
+  //cout << "trying position " << tokenPosition << "\n";
   float profit = 0;
   for (int i = 0; i < board.size(); i++) {
+    //cout << board.at(i) << "\n";
 	  float owned = ownedByMe(board, i, tokenPosition);
 	  profit += (i + 1) * owned;
     }
@@ -66,13 +70,19 @@ float calculateProfit(vector<int> board, int tokenPosition) {
 
 }
 
-vector<int> makeOptimalFirstMove(vector<int> board, int nPlayers) {
+vector<int> makeOptimalMove(vector<int> board, int nPlayers) {
 
   float maxProfit = 0;
   int maxIndex = 0;
+  vector<int> optimalHypoBoard;
 
-  if (nPlayers == 0) {
+/*  for (int i = 0; i < board.size(); i++) {
+    cout << board.at(i) << "\n";
+  }*/
+
+  if (nPlayers <= 1) {
 	  for (int i = 0; i < board.size(); i++) {
+    //  cout << "trying hypothetical position " << i << "\n";
 	    if (board.at(i) == 0) {
 	      float profit = calculateProfit(board, i);
 	      if (profit > maxProfit) {
@@ -82,6 +92,10 @@ vector<int> makeOptimalFirstMove(vector<int> board, int nPlayers) {
 	    }
 	  }
     board.at(maxIndex) = 1;
+    for (int i = 0; i < board.size(); i++) {
+    //   cout << board.at(i) << "\n";
+   }
+   //cout << ">>>\n";
     return board;
 
   } else {
@@ -89,18 +103,56 @@ vector<int> makeOptimalFirstMove(vector<int> board, int nPlayers) {
       vector<int> hypoBoard = board;
       if (board.at(i) == 0) {
         hypoBoard.at(i) = 1;
-        hypoBoard = makeOptimalFirstMove(hypoBoard, nPlayers -1);
+        hypoBoard = makeOptimalMove(hypoBoard, nPlayers - 1);
         float profit = calculateProfit(hypoBoard, i);
         if (profit > maxProfit) {
+          optimalHypoBoard = hypoBoard;
           maxProfit = profit;
           maxIndex = i;
         }
       }
     }
-    board.at(maxIndex) = 1;
-    cout << "Optimal move with " << nPlayers << " players left is " << maxIndex + 1 << "\n";
+
+    board = optimalHypoBoard;
+
+    //cout << "Optimal move with " << nPlayers << " players left is " << maxIndex + 1 << " with profit $" << setprecision (2) << fixed << maxProfit <<  "\n";
+     for (int i = 0; i < board.size(); i++) {
+    //    cout << board.at(i) << "\n";
+    }
+    //cout << "...\n";
     return board;
   }
+}
+
+vector<int> makeOptimalFirstMove(vector<int> board, int nPlayers) {
+  //cout << "init\n";
+  for (int i = 0; i < board.size(); i++) {
+  //  cout << board.at(i) << "\n";
+  }
+
+  float maxProfit = 0;
+  int maxIndex = 0;
+  for (int i = 0; i < board.size(); i++) {
+//    cout << "trying " << i + 1 << "\n";
+    vector<int> hypoBoard = board;
+    if (board.at(i) == 0) {
+      hypoBoard.at(i) = 1;
+      for (int i = 0; i < board.size(); i++) {
+      //  cout << hypoBoard.at(i) << "\n";
+      }
+      hypoBoard = makeOptimalMove(hypoBoard, nPlayers - 1);
+
+      float profit = calculateProfit(hypoBoard, i);
+      if (profit > maxProfit) {
+        maxProfit = profit;
+        maxIndex = i;
+      }
+    }
+  }
+  board.at(maxIndex) = 1;
+  //cout << "Optimal move with " << nPlayers << " players left is " << maxIndex + 1 << " with profit $" << setprecision (2) << fixed << maxProfit <<  "\n";
+  return board;
+
 }
 
 int main() {
@@ -115,30 +167,46 @@ int main() {
   vector<int> gameBoard;
 
   for (int i = 0; i < spaces; i++) {
-	gameBoard.push_back(0);
+	  gameBoard.push_back(0);
   }
-  /*
-  for (int i = 0; i < players; i++) {
-	int space;
-	bool valid = false;
-	do {
-	  cout << "Pick a position for player " << i + 1 <<": ";
-	  cin >> space;
-	  space--;
-	  if ((space < 0) || (space >= gameBoard.size())) {
-		cerr << "Out of bounds! Pick a position between 1 and " << gameBoard.size() << "\n";
-	  } else if (gameBoard.at(space) == 1){
-		cerr << "Position " << space << " is already occupied. Try again.\n";
-	  }
-	  else {
-		gameBoard.at(space) = 1;
-		valid = true;
-	  }
-    } while (!valid);
-  }
-  */
 
-  cout << makeOptimalFirstMove(gameBoard, players).at(0);
+  vector<int> optimalBoard = gameBoard;
+  int firstMoveIndex = 0;
+  for (int i = 0; i < players; i++) {
+    optimalBoard = makeOptimalFirstMove(optimalBoard, players - i);
+    if (i == 0) {
+      for (int j = 0; j < optimalBoard.size(); j++) {
+        if (optimalBoard.at(j) == 1) {
+          firstMoveIndex = j;
+        }
+      }
+    }
+  }
+
+  float firstMoveProfit = calculateProfit(optimalBoard, firstMoveIndex);
+  float total = 0;
+  float avg = 0;
+  float allMoney = 0;
+
+  for (int i = 0; i < optimalBoard.size(); i++) {
+    if ((optimalBoard.at(i) == 1) && (i != firstMoveIndex)) {
+      total += calculateProfit(optimalBoard, i);
+    }
+    allMoney += (i+1);
+  }
+  avg = total / (players - 1);
+
+  optimalBoard.at(firstMoveIndex) = 11;
+
+  cout << "Optimal game board shown below (first move marked '11')\n";
+  for (int i = 0; i < optimalBoard.size(); i++) {
+    cout << optimalBoard.at(i) << "\n";
+  }
+
+  cout << "Optimal first move is " << firstMoveIndex + 1 << " with profit $" << setprecision (2) << fixed << firstMoveProfit << " (" << ((firstMoveProfit/allMoney) * 100) << "% of the total money)" "\n";
+  cout << "Average profit for non-first moves is $" << setprecision (2) << fixed << avg << "\n";
+  cout << "Advantage of moving first is $" << setprecision (2) << fixed << firstMoveProfit - avg << "\n";
+
 
   return 0;
 }
