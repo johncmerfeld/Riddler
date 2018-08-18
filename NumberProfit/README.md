@@ -30,7 +30,9 @@ Optimal first move is 5 with profit $21.00 (38.18% of the total money)
 Average profit for non-first moves is $17.00
 Advantage of moving first is $4.00
 ```
-Player A put her token in the middle, player B put her token on 9, and player C put her token on 8. This "take the middle" strategy continued to win as the number of spaces increased from 10 (interestingly, when the number of spaces were 8 or 9, it was optimal to take the second-highest position first).
+Player A put her token in the middle, player B put her token on 9, and player C put her token on 8. If player A had gone too low, the higher-position players would have gotten more money by proximity, and if player A had gone too high, another player would have placed her token just below player A's, stealing all of the lower-hanging fruits. The middle placement is, as they say, just right.
+
+The "middle" strategy continued to win as the number of spaces increased from 10 (interestingly, when the number of spaces were 8 or 9, it was optimal to take the second-highest position first).
 ```
 # 3 players, 12 spaces
 Optimal first move is 6 with profit $32.00 (41.03% of the total money)
@@ -47,3 +49,6 @@ Optimal first move is 31 with profit $840.50 (45.93% of the total money)
 Average profit for non-first moves is $494.75
 Advantage of moving first is $345.75
 ```
+Now, I know what you're thinking: "Hey, that looks like it's monotonically increasing!" It does look that way, but it's actually just a coincidence. The advantage seems to top out and hover around 45%, or 12% more of the pot than a random move would get you. Not bad!
+
+![Unimpressive spaces plot](UnimpressivePlot.png)
