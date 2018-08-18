@@ -32,7 +32,7 @@ As you can see, this quickly becomes [computationally infeasible](https://en.wik
     - She starts by hypothetically placing her token at the first space
     - She calculates what her payout would be if the other `N - 1` players place their tokens in a way that maximizes their payout
       - She knows the other players will try each *available* space on the board as it exists after her hypothetical move
-    - She continues down the line until she has considered every space and found the one that yields the highest payout, and puts her token there
+    - She continues down the line until she has considered all `M` spaces and found the one that yields the highest payout, and puts her token there
   - The next player considers her available moves on the board in its new state.
   - ...and so on and so forth!
 
