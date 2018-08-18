@@ -52,3 +52,7 @@ Advantage of moving first is $345.75
 Now, I know what you're thinking: "Hey, that looks like it's monotonically increasing!" It does look that way, but it's actually just a coincidence. The advantage seems to top out and hover around 45%, or 12% more of the pot than a random move would get you. Not bad!
 
 ![Unimpressive spaces plot](UnimpressivePlot.png)
+
+When the number of players increases, however, this advantage appeared to dry up slightly. I wasn't able to get super robust data on this point, because the simulations starting taking too long (the algorithm checks every possible game tree, after all). No matter what, though, the best strategy is to go low. More players up top sinks player A farther down the number line, and she gets less additional payout for going first. But as this crude plot demonstrates, the numbers aren't conclusive.
+
+![Unimpressive spaces plot](playerPlot.png)
