@@ -23,3 +23,10 @@ I wondered momentarily whether that wasn't the point of the riddle; that the pla
 Eventually, I found the bug in my code by which player A wasn't fully considering player C's possible moves, and the program got up and running properly!
 
 ## Numerical results
+
+In the "standard" game, the program gave the following results:
+```
+Optimal first move is 5 with profit $21.00 (38.18% of the total money)
+Average profit for non-first moves is $17.00
+Advantage of moving first is $4.00
+```

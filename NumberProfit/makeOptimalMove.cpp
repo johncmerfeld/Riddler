@@ -200,7 +200,7 @@ int main() {
 
   cout << "Optimal game board shown below (first move marked '11')\n";
   for (int i = 0; i < optimalBoard.size(); i++) {
-    cout << optimalBoard.at(i) << "\n";
+    cout << i + 1 << ". " << optimalBoard.at(i) << "\n";
   }
 
   cout << "Optimal first move is " << firstMoveIndex + 1 << " with profit $" << setprecision (2) << fixed << firstMoveProfit << " (" << ((firstMoveProfit/allMoney) * 100) << "% of the total money)" "\n";
