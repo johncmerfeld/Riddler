@@ -1,6 +1,6 @@
 # NumberProfit
 
-## The topline conclusion: The winning strategy is to be the lowest-placed token of the group; let the other players crowd out the high-value spaces while you sweep up many low-dollar ones.
+## The topline conclusion: The winning strategy is usually to be the lowest-placed token of the group; let the other players crowd out the high-value spaces while you sweep up many low-dollar ones.
 
 ## [The challenge](https://fivethirtyeight.com/features/step-1-game-theory-step-2-step-3-profit/)
 From Steven Pratt, use your econ, win some cash:
@@ -20,7 +20,7 @@ Getting the C++ code to compile didn't take long, but I struggled to actually ac
 
 I wondered momentarily whether that wasn't the point of the riddle; that the player who acts first is always at a disadvantage. But there *was* an optimal first placement for A that I found with a smaller experiment: 3 players and 5 spots. In that case, A should (counterintuitively, I thought) place her token on 3, collecting 1+2+3=6 dollars, the most possible.
 
-Eventually, I found the bug in my code by which player A wasn't fully considering player C's possible moves, and the program got up and running properly!
+Eventually, I found the bug in my code by which player A wasn't fully considering player C's possible moves, and the program got up and running properly! I made the output a little more human readable and calculated the average profits for first- and non-first moves, which allowed me to answer the actual question posed by the Riddler! Conveniently, my program could take in any number of players or possible spaces, so I did some meta-analysis.
 
 ## Numerical results
 
@@ -29,4 +29,21 @@ In the "standard" game, the program gave the following results:
 Optimal first move is 5 with profit $21.00 (38.18% of the total money)
 Average profit for non-first moves is $17.00
 Advantage of moving first is $4.00
+```
+Player A put her token in the middle, player B put her token on 9, and player C put her token on 8. This "take the middle" strategy continued to win as the number of spaces increased from 10 (interestingly, when the number of spaces were 8 or 9, it was optimal to take the second-highest position first).
+```
+# 3 players, 12 spaces
+Optimal first move is 6 with profit $32.00 (41.03% of the total money)
+Average profit for non-first moves is $23.00
+Advantage of moving first is $9.00
+
+# 3 players, 30 spaces
+Optimal first move is 15 with profit $200.00 (43.01% of the total money)
+Average profit for non-first moves is $132.50
+Advantage of moving first is $67.50
+
+# 3 players, 60 spaces
+Optimal first move is 31 with profit $840.50 (45.93% of the total money)
+Average profit for non-first moves is $494.75
+Advantage of moving first is $345.75
 ```
