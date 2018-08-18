@@ -1,5 +1,7 @@
 # NumberProfit
 
+## The topline conclusion: The winning strategy is to be the lowest-placed token of the group; let the other players crowd out the high-value spaces while you sweep up many low-dollar ones.
+
 ## [The challenge](https://fivethirtyeight.com/features/step-1-game-theory-step-2-step-3-profit/)
 From Steven Pratt, use your econ, win some cash:
 
@@ -11,10 +13,13 @@ How will this game play out? How much is it worth to go first?
 
 *A grab bag of extra credits:* What if the game were played not on a number line but on a clock, with values of $1 to $12? What if Desdemona, Eleanor and so on joined the original game? What if the tokens could be placed anywhere on the number line, not just the stacks?
 
-## Strategy:
-For starters, I thought it'd be fun to make a real, playable version of the game, which you can find [here](https://johncmerfeld.github.io/numberProfit.html). I messed around with this for a while and thought I knew what the optimal move for player A was, but it was hard to be sure without writing everything down. Therefore, it was time for some MiniMax game-tree traversal!
+## Workflow:
+For starters, I thought it'd be fun to make a real, playable version of the game, which you can find [here](https://johncmerfeld.github.io/numberProfit.html). I messed around with this for a while and thought I knew what the optimal move for player A was (8), but it was hard to be sure without writing everything down. Therefore, it was time for some MiniMax game-tree traversal!
 
-Yes, that's right. I'd have to write a script that could do a few things:
-  - `calculateExpectedProfit()` given a board (which tokens are where), the number of players who still need to place their tokens, and a proposed token location
+Getting the C++ code to compile didn't take long, but I struggled to actually achieve optimal gameplay. At first, I was fooled because the result confirmed my hunch that player A should place her token on space 8, with player B placing her token on 6, also as I thought was optimal. Then I noticed that player C was outfoxing A by placing her token on 9, putting A in last place!
 
+I wondered momentarily whether that wasn't the point of the riddle; that the player who acts first is always at a disadvantage. But there *was* an optimal first placement for A that I found with a smaller experiment: 3 players and 5 spots. In that case, A should (counterintuitively, I thought) place her token on 3, collecting 1+2+3=6 dollars, the most possible.
 
+Eventually, I found the bug in my code by which player A wasn't fully considering player C's possible moves, and the program got up and running properly!
+
+## Numerical results
