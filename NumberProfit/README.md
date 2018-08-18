@@ -1,6 +1,6 @@
 # NumberProfit
 
-## The topline conclusion: The winning strategy is usually to be the lowest-placed token of the group; let the other players crowd out the high-value spaces while you sweep up many low-dollar ones.
+## The topline conclusion: The winning strategy is usually to be the lowest-placed token of the group, placed in the middle of the board. Let the other players crowd out the high-value spaces while you sweep up many low-dollar ones.
 
 ## [The challenge](https://fivethirtyeight.com/features/step-1-game-theory-step-2-step-3-profit/)
 From Steven Pratt, use your econ, win some cash:
