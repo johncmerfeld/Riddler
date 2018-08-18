@@ -22,6 +22,20 @@ I wondered momentarily whether that wasn't the point of the riddle; that the pla
 
 Eventually, I found the bug in my code by which player A wasn't fully considering player C's possible moves, and the program got up and running properly! I made the output a little more human readable and calculated the average profits for first- and non-first moves, which allowed me to answer the actual question posed by the Riddler! Conveniently, my program could take in any number of players or possible spaces, so I did some meta-analysis.
 
+## The algorithm
+
+Minimax is one of a few things in this universe that is aptly named. In its basic form, we can think of a two-person, zero-sum game, i.e. you want to maximize your score, and I want to minimize your score (thus maximizing my own). When you consider how to move in this simple game, you want to look ahead to what my best move is *from the game state you will create with your potential move*. But to calculate how I'll move, you'll need to look ahead to all the possible moves you might make in response to all of my possible moves!
+
+As you can see, this quickly becomes [computationally infeasible](https://en.wikipedia.org/wiki/Game_complexity#Complexities_of_some_well-known_games), particularly as we add players and spaces. Fortunately, the state space of this game (or at least the 3-player, 10-space "base" version of it) is small enough to explore in under a second. What the `makeOptimalMove` script does is essentially the following:
+  - Start with `N` players an empty board of size `M`
+  - The first player considers her moves:
+    - She starts by hypothetically placing her token at the first space
+    - She calculates what her payout would be if the other `N - 1` players place their tokens in a way that maximizes their payout
+      - She knows the other players will try each *available* space on the board as it exists after her hypothetical move
+    - She continues down the line until she has considered every space and found the one that yields the highest payout, and puts her token there
+  - The next player considers her available moves on the board in its new state.
+  - ...and so on and so forth!
+
 ## Numerical results
 
 In the "standard" game, the program gave the following results:
