@@ -5,6 +5,15 @@
 #include <iomanip>
 using namespace std;
 
+/* Get the ownership relationship to a space on the board
+
+  arguments: board - a vector of ints representing the stacks
+             boardPosition - an int, which index of the board to examine
+             myPosition - an int, from where on the board is the ownership assessed
+  returns: a float, one of {1 - I own it fully
+                            0.5 - I own half of it
+                            0 - I don't own it at all}
+*/
 float ownedByMe(vector<int> board, int boardPosition, int myPosition) {
 
   /* base case, we're on the spot */
@@ -16,13 +25,14 @@ float ownedByMe(vector<int> board, int boardPosition, int myPosition) {
   if ((board.at(boardPosition) == 1) && (boardPosition != myPosition)) {
 	  return 0;
   }
+  /* mark myPosition since it's a hypothetical spot as of now */
   board.at(myPosition) = 1;
-  /* identify which spaces have tokens */
 
+  /* start searching outward from the position in question */
   for (int i = 1; i < board.size(); i++) {
-  	/* if within board: */
 	  int lower = 0;
   	int higher = 0;
+    /* check if within board */
 	  if ((boardPosition - i) >= 0) {
 	    lower = board.at(boardPosition - i);
   	}
@@ -52,37 +62,36 @@ float ownedByMe(vector<int> board, int boardPosition, int myPosition) {
         }
   	  }
     }
-
   return 0;
-
 }
 
+/* calculate the profitability of a board from a position
+  arguments: board - a vector of ints representing the stacks
+             tokenPosition - an int, which index of the board to base profit on
+*/
 float calculateProfit(vector<int> board, int tokenPosition) {
 
-  //cout << "trying position " << tokenPosition << "\n";
   float profit = 0;
   for (int i = 0; i < board.size(); i++) {
-    //cout << board.at(i) << "\n";
 	  float owned = ownedByMe(board, i, tokenPosition);
 	  profit += (i + 1) * owned;
     }
   return profit;
-
 }
 
+/* find the most profitable move given opponants' optimal moves
+  arguments: board - a vector of ints representing the stacks
+             nPlayers - int, how many more players are left, including me
+*/
 vector<int> makeOptimalMove(vector<int> board, int nPlayers) {
 
   float maxProfit = 0;
   int maxIndex = 0;
   vector<int> optimalHypoBoard;
 
-/*  for (int i = 0; i < board.size(); i++) {
-    cout << board.at(i) << "\n";
-  }*/
-
+  /* base case, find best spot on the current board */
   if (nPlayers <= 1) {
 	  for (int i = 0; i < board.size(); i++) {
-    //  cout << "trying hypothetical position " << i << "\n";
 	    if (board.at(i) == 0) {
 	      float profit = calculateProfit(board, i);
 	      if (profit > maxProfit) {
@@ -92,12 +101,9 @@ vector<int> makeOptimalMove(vector<int> board, int nPlayers) {
 	    }
 	  }
     board.at(maxIndex) = 1;
-    for (int i = 0; i < board.size(); i++) {
-    //   cout << board.at(i) << "\n";
-   }
-   //cout << ">>>\n";
     return board;
 
+  /* find best spot assuming next player will make an optimal move */
   } else {
     for (int i = 0; i < board.size(); i++) {
       vector<int> hypoBoard = board;
@@ -112,36 +118,25 @@ vector<int> makeOptimalMove(vector<int> board, int nPlayers) {
         }
       }
     }
-
     board = optimalHypoBoard;
-
-    //cout << "Optimal move with " << nPlayers << " players left is " << maxIndex + 1 << " with profit $" << setprecision (2) << fixed << maxProfit <<  "\n";
-     for (int i = 0; i < board.size(); i++) {
-    //    cout << board.at(i) << "\n";
-    }
-    //cout << "...\n";
     return board;
   }
 }
 
+/* find the most profitable first move given opponants' optimal moves
+  arguments: board - a vector of ints representing the stacks
+             nPlayers - int, how many more players are left, including me
+*/
 vector<int> makeOptimalFirstMove(vector<int> board, int nPlayers) {
-  //cout << "init\n";
-  for (int i = 0; i < board.size(); i++) {
-  //  cout << board.at(i) << "\n";
-  }
 
   float maxProfit = 0;
   int maxIndex = 0;
+  /* find best spot assuming next player will make an optimal move */
   for (int i = 0; i < board.size(); i++) {
-//    cout << "trying " << i + 1 << "\n";
     vector<int> hypoBoard = board;
     if (board.at(i) == 0) {
       hypoBoard.at(i) = 1;
-      for (int i = 0; i < board.size(); i++) {
-      //  cout << hypoBoard.at(i) << "\n";
-      }
       hypoBoard = makeOptimalMove(hypoBoard, nPlayers - 1);
-
       float profit = calculateProfit(hypoBoard, i);
       if (profit > maxProfit) {
         maxProfit = profit;
@@ -150,13 +145,12 @@ vector<int> makeOptimalFirstMove(vector<int> board, int nPlayers) {
     }
   }
   board.at(maxIndex) = 1;
-  //cout << "Optimal move with " << nPlayers << " players left is " << maxIndex + 1 << " with profit $" << setprecision (2) << fixed << maxProfit <<  "\n";
   return board;
-
 }
 
 int main() {
 
+  /* read in game information */
   int players;
   int spaces;
   cout << "How many players? ";
@@ -170,6 +164,7 @@ int main() {
 	  gameBoard.push_back(0);
   }
 
+  /* record information about first move */
   vector<int> optimalBoard = gameBoard;
   int firstMoveIndex = 0;
   for (int i = 0; i < players; i++) {
@@ -183,6 +178,7 @@ int main() {
     }
   }
 
+  /* generate summary statistics */
   float firstMoveProfit = calculateProfit(optimalBoard, firstMoveIndex);
   float total = 0;
   float avg = 0;
