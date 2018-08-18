@@ -1,6 +1,6 @@
 # NumberProfit
 
-## The topline conclusion: The winning strategy is usually to be the lowest-placed token of the group, placed in the middle of the board. Let the other players crowd out the high-value spaces while you sweep up many low-dollar ones.
+### The topline conclusion: The winning strategy is usually to be the lowest-placed token of the group, placed in the middle of the board. Let the other players crowd out the high-value spaces while you sweep up many low-dollar ones.
 
 ## [The challenge](https://fivethirtyeight.com/features/step-1-game-theory-step-2-step-3-profit/)
 From Steven Pratt, use your econ, win some cash:
@@ -13,7 +13,7 @@ How will this game play out? How much is it worth to go first?
 
 *A grab bag of extra credits:* What if the game were played not on a number line but on a clock, with values of $1 to $12? What if Desdemona, Eleanor and so on joined the original game? What if the tokens could be placed anywhere on the number line, not just the stacks?
 
-## Workflow:
+## Workflow
 For starters, I thought it'd be fun to make a *real, playable version of the game*, which you can find [here](https://johncmerfeld.github.io/numberProfit.html). I messed around with this for a while and thought I knew what the optimal move for player A was (8), but it was hard to be sure without writing everything down. Therefore, it was time for some MiniMax game-tree traversal!
 
 Getting the C++ code to compile didn't take long, but I struggled to actually achieve optimal gameplay. At first, I was fooled because the result confirmed my hunch that player A should place her token on space 8, with player B placing her token on 6, also as I thought was optimal. Then I noticed that player C was outfoxing A by placing her token on 9, putting A in last place!
@@ -53,6 +53,18 @@ Now, I know what you're thinking: "Hey, that looks like it's monotonically incre
 
 ![Unimpressive spaces plot](UnimpressivePlot.png)
 
-When the number of players increases, however, this advantage appeared to dry up slightly. I wasn't able to get super robust data on this point, because the simulations starting taking too long (the algorithm checks every possible game tree, after all). No matter what, though, the best strategy is to go low. More players up top sinks player A farther down the number line, and she gets less additional payout for going first. But as this crude plot demonstrates, the numbers aren't conclusive.
+When the number of players increases, however, this advantage appeared to dry up slightly. I wasn't able to get super robust data on this point, because the simulations starting taking too long (the algorithm checks every possible game tree, after all). No matter what, though, the best strategy is to go low. More players up top sinks player A farther down the number line, and she gets less additional payout for going first. But as this crude plot of the *relative* advantage (above I was referring to absolute advantage) demonstrates, the numbers are not conclusive.
 
 ![Unimpressive spaces plot](playerPlot.png)
+
+## Conclusion
+Things I could have done better:
+  1. The JavaScript code is insanely clunky, and doesn't scale up to extra players or different numbers of spaces.
+  2. The C++ is unbearably slow at `N_players` > 4 and/or `N_spaces` > 100. This is because it checks every possible branch of the [game tree](https://en.wikipedia.org/wiki/Game_tree) instead of pruning branches by taking advantage of what it already knows a good strategy is.
+  3. The C++ doesn't output in a machine-friendly format.
+  4. The visualizations are kind of weak.
+
+Things I learned:
+  1. In a game in which the objective is to be farther away from other players, the middle is the optimal first move unless the number of players is almost equal to the number of spaces.  
+  2. Using the results of HTML select menus as JavaScript variables is easy!
+  3. When debugging a recursive algorithm, check that information is being passed correctly, both *downward* and *upward*.
