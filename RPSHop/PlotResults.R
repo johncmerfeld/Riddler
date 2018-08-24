@@ -4,18 +4,21 @@ library(ggplot2)
 setwd("~/Documents/Code/Riddler/RPSHop/")
 
 plotResults <- function(maxHoops, Ntrials) {
-  system(paste("python RockPaperScissorsHop.py", maxHoops, Ntrials))
   filename <- paste0("rpsh_", maxHoops, "_", Ntrials, ".csv")
-  results <- fread(filename, header = F,
+  cleanName <- paste0("rpsh_", maxHoops, "_", Ntrials, "_clean.csv")
+  system(paste("sed 's/[{}]//g'", filename, ">", cleanName))
+  results <- fread(cleanName, header = F,
                    colClasses = c("numeric"),
                    col.names = c("avgDuration"))
+
+  results$minutes <- results$avgDuration / 60
   
   ggplot(results,
-         aes(x = seq_along(results$avgDuration),
-             y = results$avgDuration)) +
-    geom_point()
-  
-  return(results)
+         aes(x = seq_along(results$minutes),
+             y = results$minutes)) +
+    geom_point() + 
+    xlab("Number of hoops") + 
+    ylab("Average duration in minutes")
 }
 
-r <- plotResults(10, 10)
+plotResults(40, 100)

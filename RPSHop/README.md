@@ -10,7 +10,12 @@ Kids stand at either end of N hoops.
   - The loser goes back to their end of the hoops, a new kid immediately steps up at that end, and the winner and the new player hop until they run into each other.
   - This process continues until someone reaches the opposing end. That player’s team wins!
 
-
 You’ve just been hired as the gym teacher at Riddler Elementary. You’re having a bad day, and you want to make sure the kids stay occupied for the entire class. If you put down eight hoops, how long on average will the game last? How many hoops should you put down if you want the game to last for the entire 30-minute period, on average?
 
-## The st
+## Workflow
+
+At first, I wanted to proof this out, but I am simply not a theorist (although I'll keep trying!). The one insight I did get from the purely mathematical work was that one rock, paper, scissors (RPS) match should take on average 1.5 seconds. Indeed, that was backed up in practice. If there were no hoops separating the first two children, the game of RPSHop lasted about 1.5 seconds on average.
+
+The Python script is a pretty straightforward simulator. Everything is wrapped in an `iterate()` function and the simulation can be run as many times as the user wants. Thus, the script has parameters `maxHoops` and `Ntrials`, and will write out a CSV containing the average time over `Ntrials` for games with sizes form 0 to `maxHoops`.
+
+Then I wrote an R script that could read in the results of the Python simulation and plot it. Immediately, I saw a relationship that looked quadratic.
