@@ -1,8 +1,12 @@
 # RockPaperScissorsHop
 
+### Topline conclusion: An 8-hoop game takes about 58 seconds, on average. The length of a game increases roughly quadratically as the number of hoops goes up, and it appears that once there are 58 hoops, the average game can be expected to take 30 minutes, filling an entire class period.
+
 ## [The challenge](https://fivethirtyeight.com/features/how-many-hoops-will-kids-jump-through-to-play-rock-paper-scissors/)
 
-Let’s call this game rock-paper-scissors-hop. Here is an idealized list of its rules:
+The following [delightful video](https://www.youtube.com/watch?v=PcIord7RNAI) has been making the viral rounds. 
+
+Let’s call this game rock-paper-scissors-hop *('RPSHop' in this document)*. Here is an idealized list of its rules:
 
 Kids stand at either end of N hoops.
   - At the start of the game, one kid from each end starts hopping at a speed of one hoop per second until they run into each other, either in adjacent hoops or in the same hoop.
@@ -14,7 +18,7 @@ You’ve just been hired as the gym teacher at Riddler Elementary. You’re havi
 
 ## Workflow
 
-At first, I wanted to proof this out, but I am simply not a theorist (although I'll keep trying!). The one insight I did get from the purely mathematical work was that one rock, paper, scissors (RPS) match should take on average 1.5 seconds. Indeed, that was backed up in practice. If there were no hoops separating the first two children, the game of RPSHop lasted about 1.5 seconds on average.
+At first, I wanted to proof this out, but I am simply not a theorist (although I'll keep trying!). The one insight I did get from the purely mathematical work was that one rock, paper, scissors (RPS) match should take on average 1.5 seconds. Indeed, that was backed up in practice: if there were no hoops separating the first two children, the game of RPSHop ending up lasting about 1.5 seconds on average.
 
 The Python script is a pretty straightforward simulator. Everything is wrapped in an `iterate()` function and the simulation can be run as many times as the user wants. Thus, the script has parameters `maxHoops` and `Ntrials`, and will write out a CSV containing the average time over `Ntrials` for games with sizes form 0 to `maxHoops`.
 
