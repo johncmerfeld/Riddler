@@ -17,8 +17,16 @@ plotResults <- function(maxHoops, Ntrials) {
          aes(x = seq_along(results$minutes),
              y = results$minutes)) +
     geom_point() + 
+    stat_smooth(aes(y = results$minutes), method = "lm", 
+                formula = y ~ x + I(x^2), size = 1) +
     xlab("Number of hoops") + 
-    ylab("Average duration in minutes")
+    ylab("Average duration in minutes") +
+    geom_hline(yintercept = 30) + 
+    annotate("text", min(results$minutes), 30, vjust = -1, hjust = -0.2,
+             label = "Class period")
+  
 }
 
-plotResults(40, 100)
+plotResults(60, 20)
+
+
