@@ -22,11 +22,15 @@ plotResults <- function(maxHoops, Ntrials) {
     xlab("Number of hoops") + 
     ylab("Average duration in minutes") +
     geom_hline(yintercept = 30) + 
+    geom_vline(xintercept = 59, size = 0.5) + 
     annotate("text", min(results$minutes), 30, vjust = -1, hjust = -0.2,
-             label = "Class period")
+             label = "Class period") +
+    annotate("text", min(results$minutes), 59, vjust = 16.5, hjust = -2.4,
+             label = "A 59-hoop game usually fills this time") +
+    ggtitle("The average game duration has a smooth relationship to the number of hoops")
   
 }
 
-plotResults(60, 20)
+plotResults(100, 50)
 
 
