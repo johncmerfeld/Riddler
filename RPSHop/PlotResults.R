@@ -6,6 +6,7 @@ setwd("~/Documents/Code/Riddler/RPSHop/")
 plotResults <- function(maxHoops, Ntrials) {
   filename <- paste0("rpsh_", maxHoops, "_", Ntrials, ".csv")
   cleanName <- paste0("rpsh_", maxHoops, "_", Ntrials, "_clean.csv")
+  # remove curly braces from file
   system(paste("sed 's/[{}]//g'", filename, ">", cleanName))
   results <- fread(cleanName, header = F,
                    colClasses = c("numeric"),
