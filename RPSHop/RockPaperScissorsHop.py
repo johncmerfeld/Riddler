@@ -21,6 +21,14 @@ from random import randint
 # define 'game board' class
 class Board():
 
+    # some notes on thsi:
+    # 'hoops' is really an array of codes, where 0 means the hoop is empty, 
+    #   1 and 2 mean players 1 and 2 respectively in that hoop, and 3 means
+    #   both players are in the hoop
+    #
+    # 't' is iterated every time the players move or a match of RPS is played
+    # 'winner' is 0 until one of the players wins a game at their opponant's 
+    #   end of the board
     def __init__(self, Nhoops):
         self.hoops = np.zeros(Nhoops + 2, dtype = int)
         self.hoops[0] = 1
