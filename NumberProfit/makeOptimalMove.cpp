@@ -203,6 +203,5 @@ int main() {
   cout << "Average profit for non-first moves is $" << setprecision (2) << fixed << avg << "\n";
   cout << "Advantage of moving first is $" << setprecision (2) << fixed << firstMoveProfit - avg << "\n";
 
-
   return 0;
 }
