@@ -18,4 +18,6 @@ At first, I wanted to proof this out, but I am simply not a theorist (although I
 
 The Python script is a pretty straightforward simulator. Everything is wrapped in an `iterate()` function and the simulation can be run as many times as the user wants. Thus, the script has parameters `maxHoops` and `Ntrials`, and will write out a CSV containing the average time over `Ntrials` for games with sizes form 0 to `maxHoops`.
 
-Then I wrote an R script that could read in the results of the Python simulation and plot it. Immediately, I saw a relationship that looked quadratic.
+Then I wrote an R script that could read in the results of the Python simulation and plot it. Immediately, I saw a relationship that looked quadratic. Using ggplot, I fit a quadratic curve to the data and marked the 30-minute cutoff.
+
+I did one big test of 50 trials each for games up to 100 hoops and plotted the results here:
