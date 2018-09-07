@@ -29,7 +29,7 @@ It's a recursive function, so I wrapped in a loop and let it go for `cardsInSet 
 
 But if there's one thing that's stubbornly part of my brand, it's Monte Carlo simulations. Let's see what happens when we just "play the game."
 
-The Python code actually draws ten unique cards at random from the set and adds them to a collection. It continues doing so until the collection is full. I found that for large numbers of trials (hundreds of thousands), the average number of Silver packs bought was... 50. 
+The Python code actually draws ten unique cards at random from the set and adds them to a collection. It continues doing so until the collection is full. I found that for large numbers of trials (hundreds of thousands), the average number of Silver packs bought was... 50. Similarly, for the Gold set of 300 cards, the average number of packs bought was 186, in agreement with the theoretical result.  
 
 
 
