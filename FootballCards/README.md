@@ -25,6 +25,8 @@ I coded this up in R as the following formula:
 cardsHas_i+1 = cardsHas_i + (cardsInDeck * ((cardsInSet - floor(cardsHas)) / 
                                              cardsInSet))
 ```
+Note the use of the `floor()` function, a necessary discretization so that the function doesn't level off below 100. Without `floor()`, the formula would "punish" you for having expected fractions of cards, which isn't how it should work. i.e. it should only take you ten packs to get from 99 to 100 cards.
+
 It's a recursive function, so I wrapped in a loop and let it go for `cardsInSet = 100` and `cardsInDeck = 10`. The answer was 50 packs (or **5 weeks of allowance**) for the Silver set and 186 packs (**19 weeks of allowance** for the Gold set. Note that even though the Gold set is only 3 times larger, it takes almost 4 times longer to get all the cards because of all the extra time spent just trying to get the last few new cards.
 
 But if there's one thing that's stubbornly part of my brand, it's Monte Carlo simulations. Let's see what happens when we just "play the game."
