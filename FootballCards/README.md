@@ -33,6 +33,6 @@ But if there's one thing that's stubbornly part of my brand, it's Monte Carlo si
 
 The Python code actually draws ten unique cards at random from the set and adds them to a collection. It continues doing so until the collection is full. I found that for large numbers of trials (hundreds of thousands), the average number of Silver packs bought was... 50. Similarly, for the Gold set of 300 cards, the average number of packs bought was 186, in agreement with the theoretical result.  
 
-
+On a cheery note, I was able to reuse my `testOutcomes()` function from the RPSHop puzzle, a sign that I'm starting to accrue a library!
 
 
