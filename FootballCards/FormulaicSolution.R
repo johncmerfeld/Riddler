@@ -11,12 +11,9 @@ howManyPacks <- function(cardsInSet, cardsInDeck) {
   while (cardsHas < cardsInSet) {
     packsBought <- packsBought + 1
     # the floor function ensures that we're not 'penalized' for cards we don't actually have yet.
-    cardsHas <- cardsHas + (cardsInDeck * ((cardsInSet - floors(cardsHas)) / 
+    cardsHas <- cardsHas + (cardsInDeck * ((cardsInSet - floor(cardsHas)) / 
                                              cardsInSet))
     progress[packsBought] <- cardsHas
   }
   return(progress)
 }
-
-
-
