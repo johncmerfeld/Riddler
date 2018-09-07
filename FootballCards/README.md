@@ -14,4 +14,12 @@ What if he decides to collect the more expansive Riddler Gold set, which has 300
 
 This one was thankfully quite simple!
 
+(talk about R formula)
+
+But if there's one thing that's stubbornly part of my brand, it's Monte Carlo simulations. Let's see what happens when we just "play the game."
+
+(Python simulator)
+
+
+
 
