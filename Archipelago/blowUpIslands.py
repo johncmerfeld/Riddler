@@ -1,14 +1,39 @@
 import networkx as nx
-import matplotlib.pyplot as plt
 import random as rand
+import numpy as np
+import pandas as pd
 
-n = 20
-p = 0.1
+def blowUpIslands(n, p):
+   
+    G = nx.random_tree(n)
+    for i in range(0, n):
+        if rand.random() < p:
+            G.remove_node(i)
+    
+    return nx.number_connected_components(G)
 
-G = nx.random_tree(n)
-for i in range(0, n):
-    if rand.random() < p:
-        G.remove_node(i)
+# run a bunch of trials to get an average
+def testOutcomes(n, p, Ntrials):
+    
+    results = []
+    for i in range(0, Ntrials):
+        results.append(blowUpIslands(n, p))
+    
+    return np.mean(results)
+
+output = []
+
+for n in range(5, 1000):
+    for j in range(1, 100):
+        p = j / 100
+        d = {
+            'n' : n,
+            'p' : p,
+            'communities' : testOutcomes(n, p, 20) 
+        }
+        output.append(d)
         
-nx.draw(G, nodecolor='g', edge_color='b')
-nx.number_connected_components(G)
+output = pd.DataFrame(output)
+        
+output.to_csv('CommunitiesLeft.csv')
+
