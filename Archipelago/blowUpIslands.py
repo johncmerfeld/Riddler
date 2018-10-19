@@ -11,3 +11,4 @@ for i in range(0, n):
         G.remove_node(i)
         
 nx.draw(G, nodecolor='g', edge_color='b')
+nx.number_connected_components(G)
