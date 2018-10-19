@@ -1,4 +1,4 @@
-#Archipelago
+# Archipelago
 
 ### Topline conclusion: The most disjointed communities will be left if islands collapse with probability 0.5. On average across all probabilities, we expect about `0.18n` communities to remain, where `n` is the original number of islands.
 
