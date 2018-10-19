@@ -15,9 +15,17 @@ Each island contains exactly one volcano. You know that if a volcano erupts, the
 If there were N islands in the archipelago originally and each volcano erupts independently with probability p, how many disjointed communities can you expect to find when you return? What value of p maximizes this number?
 
 ## Workflow
-Once again, I eschewed theoretical underpinnings and built a little simulator! This is a neat problem in graph theory, where the island/bridge setup can be represented by a [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)).
+Once again, I eschewed theoretical underpinnings and built a little simulator! This is a neat problem in graph theory, where the island/bridge setup can be represented by a [tree](https://en.wikipedia.org/wiki/Tree_(graph_theory)). Once that decision is made, the strategy for setting up the experiment is pretty simple.
 
-Made use of [NetworkX](https://networkx.github.io/documentation/latest/_downloads/networkx_reference.pdf)
+I made use of the excellent [NetworkX](https://networkx.github.io/documentation/latest/_downloads/networkx_reference.pdf) Python package to set up the tree randomly. Then, I iterated through every node in the tree and destroyed it with probability `p`. I ran this experiment 20 times each for a range of probabilities between 0.01 and 0.99 and island numbers from 5 to 99, collecting the results in a very tall CSV.
+
+## Results
+
+Then I popped over to R so I could use `ggplot` to create a visualization. A heatmap seemed like the best way to capture what is essentially a 3-dimensional dataset. The symmetry of the plot around `p = 0.5` underscored my original assumption, which was to strive for a balance between separating as many communities as possible without eliminating too many islands in the process.
+
+Across all probabilities, for an original configuration with `n` islands, the mean number of communities remaining was about `0.18n` and the median was about `0.2n`. So if you started with 50 islands in general, the expected number of isolated communities after the eruptions would be 10.
+
+I really enjoyed getting to use a graph library; definitely curious to see what other simulations I could make with graphs. One thing that would have made this challenge even more interesting would be some kind of stochastic ripple effect. Maybe I'll add that in and see how it effects the results.
 
 ![A heatmap of experimental results shows that 0.5 is the "optimal" value](communityPlot.jpeg)
 
