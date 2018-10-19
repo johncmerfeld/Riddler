@@ -23,7 +23,7 @@ def testOutcomes(n, p, Ntrials):
 
 output = []
 
-for n in range(5, 1000):
+for n in range(5, 100):
     for j in range(1, 100):
         p = j / 100
         d = {
