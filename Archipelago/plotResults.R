@@ -15,5 +15,5 @@ ggplot(data,
   xlab("Number of islands") +
   ylab("Probability of eruption") +
   labs(color = "Number of disjointed communities")
-  ggtitle("")
+  ggtitle("An eruption probability of 0.5 destroys maximal bridges without decimating too many islands")
  

@@ -15,6 +15,6 @@ If there were N islands in the archipelago originally and each volcano erupts in
 
 Made use of [NetworkX](https://networkx.github.io/documentation/latest/_downloads/networkx_reference.pdf)
 
-
+![A heatmap of experimental results shows that 0.5 is the "optimal" value][communityPlot.jpeg]
 
 
