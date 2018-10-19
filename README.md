@@ -8,6 +8,6 @@ Coded solutions to FiveThirtyEight's [weekly puzzles](https://fivethirtyeight.co
   - 08/17/18: [NumberProfit/](https://github.com/johncmerfeld/Riddler/tree/master/NumberProfit) (C++)
   - 08/24/18: [RPSHop/](https://github.com/johncmerfeld/Riddler/tree/master/RPSHop) (Python, R)
   - 09/07/18: [FootballCards/](https://github.com/johncmerfeld/Riddler/tree/master/FootballCards) (R, Python)
-  - 10/19/18: [Archipelago/](https://github.com/johncmerfeld/Riddler/tree/master/Archipelago)
+  - 10/19/18: [Archipelago/](https://github.com/johncmerfeld/Riddler/tree/master/Archipelago) (Python, R)
 
 
