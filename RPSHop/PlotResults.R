@@ -32,6 +32,6 @@ plotResults <- function(maxHoops, Ntrials) {
   
 }
 
-plotResults(100, 50)
+plotResults(200, 5)
 
 
