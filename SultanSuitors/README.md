@@ -1,6 +1,6 @@
 # SultonSuitors
 
-### The topline conclusion: If the goal is to maximize the expected quality of the suitor, the optimal strategy is to ignore the first 2 suitors, then accept the first suitor among the remaining 8 whose rank is better than either of those first 2. If the gaol is to maximize the odds of ending up with the absolute best suitor, the optimal strategy is instead to ignore the first 3, then pick the first one among the remaining 7 whose rank is better
+### The topline conclusion: If the goal is to maximize the expected quality of the suitor, the optimal strategy is to ignore the first 2 suitors, then accept the first suitor among the remaining 8 whose rank is better than either of those first 2. If the gaol is to maximize the odds of ending up with the absolute best suitor, the optimal strategy is instead to ignore the first 4, then pick the first one among the remaining 6 whose rank is better. To avoid the absolute worst suitor, ignore only the very initial one, and then pick the first suitor whose rank is better.
 
 ## [The challenge](https://fivethirtyeight.com/features/how-long-is-the-snails-slimy-trail/)
 
@@ -47,6 +47,14 @@ I used my usual R/ggplot setup to have a look at the results. As we can see, the
 
 ![Expected Suitor Quality](images/expectedSuitor.jpeg)
 
-### But why?
+There's an interesting asymmetry here that I want to explore further (see below). Additionally, what if we changed our victory condition a bit, such as *maximizing the likelihood that we got the best suitor*?
 
-I'm still grappling with why this answer makes sense. Why isn't the plot above symmetrical, with the optimal waiting time more like half of the suitors? Of course, if you don't wait long enough, you risk only having bad suitors to compare to, so even a mediocre one looks like the best. If you wait too long, you risk sucking up all the good suitors into your comparison pool, as it were, so there won't be any good ones left. But I don't know why the second force seems to outweigh the first. I'll ask my more probability minded friends about this and write back, if I can.
+![Best suitor](images/bestSuitor.jpeg)
+
+If you look at the raw data, you can see why this is a little different from the first plots. `w` values of 3 and 4 have "Expected Suitor Quality Scores" very close to `w=2`, but higher standard deviations. This means they're more likely to yield an ideal outcome, but also more likely to yield a disastrous outcome:
+
+![Worst suitor](images/worstSuitor.jpeg)
+
+This plot is really cool, because it illustrates the exploration / exploitation tradeoff in a completely linear way (with the exception of the "always pick the first one" strategy). Bear in mind that there are **two** ways to **not** pick the best suitor: they could be one of the ones you ignored, **OR** they could be behind someone you pick "prematurely." But there's only **one** way to pick the worst suitor: they are the very last one you see, **AND** you saw the absolute best one during the exploration phase, so you refuse to pick anybody else by the time you get to the end. The risk of spending too much time in the exploration phase is huge, here, because there is a guaranteed 10% chance that the worst suitor will be the last one you see, so the longer you explore, the more likely you are to see the best suitor and get "locked out" of picking any others.
+
+In fact, the more I think about it, the more I realize how important the green plot is. While the "best suitor" plot is basically symmetric, this one is linear. You can think of the "expected" suitor case (the blue plot) as a combination of these two, in a way. The symmetric and asymmetric plots combine to form one that still makes a nice bell curve, but is skewed toward less information, more exploitation. Who knew that information could be so debilitating! 
