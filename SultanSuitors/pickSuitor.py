@@ -73,6 +73,6 @@ for nTrials in [1, 10, 100, 1000, 10000, 100000]:
         
 output = pd.DataFrame(output)
         
-#output.to_csv('CommunitiesLeft.csv')
+output.to_csv('SuitorData.csv')
 
 print(output)

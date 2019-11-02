@@ -1,6 +1,6 @@
 # SultonSuitors
 
-### The topline conclusion:
+### The topline conclusion: If the goal is to maximize the expected quality of the suitor, the optimal strategy is to ignore the first 2 suitors, then accept the first suitor among the remaining 8 whose rank is better than either of those first 2. If the gaol is to maximize the odds of ending up with the absolute best suitor, the optimal strategy is instead to ignore the first 3, then pick the first one among the remaining 7 whose rank is better
 
 ## [The challenge](https://fivethirtyeight.com/features/how-long-is-the-snails-slimy-trail/)
 
@@ -11,3 +11,42 @@ The sultan has asked her vizier to present her with 10 candidates for marriage. 
 For example, if she simply accepted the first candidate presented to her, his rank could be anywhere from 1 to 10 with equal probability, averaging to 5.5. Surely she can do better…
 
 ## Workflow
+
+Phew! It's been quite a while since I've dusted off my Riddler boots, but this one seemed ripe for a little Python simulation. At first glance, it wasn't intuitive to me what the right strategy would be. Like, if the best suitor was the first person you saw, you'd have no way of knowing that you wouldn't see anyone better.
+
+### The theoretical solution
+
+Well, that dilemma turns out to be the whole basis for the solution. If you read the Wolfram MathWorld article linked to above, you'll see that the optimal strategy in this problem is to pick a value, let's call it `w`. Then your algorithm looks like this:
+
+  - For the first `w` suitors, keep track of who is the best one you've seen so far, but don't actually consider picking any of them.
+  - Then, for the `w + 1`th suitor that you see, consider the following:
+    - If suitor `w + 1` is better than the best suitor you've seen so far, pick them immediately
+    - Otherwise, keep looking
+  - If you get to the end, of course, you have to pick the last suitor, which is an equivalent strategy to picking the first one
+
+In a broad, scientific sense, you can think of this algorithm boiling down to an **exploration phase** and an **exploitation phase**, which is a framework you'll run into in lots of problems where you have limited information (can't know the absolute ranks of suitors) and limited time (only get to consider each suitor once). If you spend more time in the exploration phase, you will end up with better information, but less opportunity to use it. If you don't explore much, you have more opportunity to exploit your knowledge, but that knowledge may have crucial gaps. *(any kind of A/B testing, or really any experiment at all, has constraints like these)*
+
+So the question becomes this: how do you find the right value for `w` given an `n`, where `n` is the number of suitors? Well, long story short, you can prove mathematically that it's around `n/e`, where `e` is Euler's constant: `2.718... and all the rest`. In our case, `n` equals 10, which is pretty small, so the actual answer will be a little lower. We could prove it out on paper, but that's not how we do things around here!
+
+### The experiment
+The attached Python script, `pickSuitor.py`, implements the above algorithm, with a few extra bells and whistles for analysis. Here's the experiment it runs:
+  - Randomly shuffle the numbers 1 through 10, representing the suitors
+  - Go through the numbers one at a time, only storing the lower one seen so far
+  - After `w` numbers, keep an eye out for a number that's lower than the current lowest and return it immediately if found
+  - If such a number never arrives, return the last number seen
+  - In either case:
+    - If the number being returned is 1 (best suitor), return an extra "Top Suitor" flag
+    - If the number being returned is 10 (worst suitor) return an extra "Bottom suitor" flag
+    - If the number being returned is 5 or lower (top half), return an extra "Positive outcome" flag
+
+It does this 100,000 times with `w` values between 0 (pick the first suitor) and 9 (pick the last one) and tabulates the average ranks of the suitor it picked, as well as the totals of top suitors picked, bottom suitors picked, and positive overall outcomes.
+
+### The results
+
+I used my usual R/ggplot setup to have a look at the results. As we can see, the optimal strategy for maximizing the *expected quality of our suitor* is pretty clear:
+
+![Expected Suitor Quality](images/expectedSuitor.jpeg)
+
+### But why?
+
+I'm still grappling with why this answer makes sense. Why isn't the plot above symmetrical, with the optimal waiting time more like half of the suitors? Of course, if you don't wait long enough, you risk only having bad suitors to compare to, so even a mediocre one looks like the best. If you wait too long, you risk sucking up all the good suitors into your comparison pool, as it were, so there won't be any good ones left. But I don't know why the second force seems to outweigh the first. I'll ask my more probability minded friends about this and write back, if I can.
