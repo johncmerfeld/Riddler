@@ -1,6 +1,8 @@
 # SultonSuitors
 
-### The topline conclusion: If the goal is to maximize the expected quality of the suitor, the optimal strategy is to ignore the first 2 suitors, then accept the first suitor among the remaining 8 whose rank is better than either of those first 2. If the gaol is to maximize the odds of ending up with the absolute best suitor, the optimal strategy is instead to ignore the first 4, then pick the first one among the remaining 6 whose rank is better. To avoid the absolute worst suitor, ignore only the very initial one, and then pick the first suitor whose rank is better.
+### The topline conclusion: If the goal is to maximize the expected quality of the suitor, the optimal strategy is to ignore the first 2 suitors, then accept the first suitor among the remaining 8 whose rank is better than either of those first 2. Their average rank will be 3rd out of 10.
+
+#### If the gaol is to maximize the odds of ending up with the absolute best suitor, the optimal strategy is instead to ignore the first 4, then pick the first one among the remaining 6 whose rank is better. To avoid the absolute worst suitor, ignore only the very initial one, and then pick the first suitor whose rank is better.
 
 ## [The challenge](https://fivethirtyeight.com/features/how-long-is-the-snails-slimy-trail/)
 
@@ -57,4 +59,10 @@ If you look at the raw data, you can see why this is a little different from the
 
 This plot is really cool, because it illustrates the exploration / exploitation tradeoff in a completely linear way (with the exception of the "always pick the first one" strategy). Bear in mind that there are **two** ways to **not** pick the best suitor: they could be one of the ones you ignored, **OR** they could be behind someone you pick "prematurely." But there's only **one** way to pick the worst suitor: they are the very last one you see, **AND** you saw the absolute best one during the exploration phase, so you refuse to pick anybody else by the time you get to the end. The risk of spending too much time in the exploration phase is huge, here, because there is a guaranteed 10% chance that the worst suitor will be the last one you see, so the longer you explore, the more likely you are to see the best suitor and get "locked out" of picking any others.
 
-In fact, the more I think about it, the more I realize how important the green plot is. While the "best suitor" plot is basically symmetric, this one is linear. You can think of the "expected" suitor case (the blue plot) as a combination of these two, in a way. The symmetric and asymmetric plots combine to form one that still makes a nice bell curve, but is skewed toward less information, more exploitation. Who knew that information could be so debilitating!
+In fact, the more I think about it, the more I realize how important the green plot is. While the "best suitor" plot is basically symmetric, this one is linear. You can think of the "expected" suitor case (the blue plot) as a combination of these two, in a way. The symmetric and asymmetric plots combine to form one that still makes a nice bell curve, but is skewed toward less information, more exploitation.
+
+I enjoyed this problem a lot for a couple of reasons:
+  1. There was as an intuitive theoretical underpinning that I was able to approach more closely using experimental data, the shape of which I genuinely did not expect in advance
+  2. I got to reuse my general Python code structure from previous Riddlers (and it got my thinking about making an abstract `Simulator` class of some king)
+  3. Over the course of working on this I ended up on some cool parts of the Web, such as this [MathOverflow discussion of counterintuitive probability problems](https://math.stackexchange.com/questions/2140493/counterintuitive-examples-in-probability).
+  4. The surprising results I did get were the product of extra "flag" variables I added to my experimental output, which I haven't done before. I'll keep trying to push the bounds of Riddler problems in the future!
