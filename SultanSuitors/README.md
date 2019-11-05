@@ -63,6 +63,6 @@ In fact, the more I think about it, the more I realize how important the green p
 
 I enjoyed this problem a lot for a couple of reasons:
   1. There was as an intuitive theoretical underpinning that I was able to approach more closely using experimental data, the shape of which I genuinely did not expect in advance
-  2. I got to reuse my general Python code structure from previous Riddlers (and it got my thinking about making an abstract `Simulator` class of some king)
+  2. I got to reuse my general Python code structure from previous Riddlers (and it got my thinking about making an abstract `Simulator` class of some kind)
   3. Over the course of working on this I ended up on some cool parts of the Web, such as this [MathOverflow discussion of counterintuitive probability problems](https://math.stackexchange.com/questions/2140493/counterintuitive-examples-in-probability).
   4. The surprising results I did get were the product of extra "flag" variables I added to my experimental output, which I haven't done before. I'll keep trying to push the bounds of Riddler problems in the future!
