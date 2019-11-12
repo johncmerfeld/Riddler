@@ -1,8 +1,9 @@
 # SultonSuitors
 
-### The topline conclusion: If the goal is to maximize the expected quality of the suitor, the optimal strategy is to ignore the first 2 suitors, then accept the first suitor among the remaining 8 whose rank is better than either of those first 2. Their average rank will be 3rd out of 10.
-
-#### If the gaol is to maximize the odds of ending up with the absolute best suitor, the optimal strategy is instead to ignore the first 4, then pick the first one among the remaining 6 whose rank is better. To avoid the absolute worst suitor, ignore only the very initial one, and then pick the first suitor whose rank is better.
+### The topline conclusions: 
+  - If the goal is to maximize the expected quality of the suitor, the optimal strategy is to ignore the first 2 suitors, then accept the first suitor among the remaining 8 whose rank is better than either of those first 2. Their average rank will be 3rd out of 10.
+  - If the goal is to maximize the odds of ending up with the absolute best suitor, the optimal strategy is instead to ignore the first 4, then pick the first one among the remaining 6 whose rank is better. 
+  - To avoid the absolute worst suitor, ignore only the very initial one, and then pick the first suitor whose rank is better.
 
 ## [The challenge](https://fivethirtyeight.com/features/how-long-is-the-snails-slimy-trail/)
 
